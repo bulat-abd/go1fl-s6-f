@@ -71,5 +71,5 @@ func UploadHandler(w http.ResponseWriter, req *http.Request) {
 	}
 
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte("Конвертация выполнена: " + convertedString))
+	w.Write([]byte(convertedString))
 }
