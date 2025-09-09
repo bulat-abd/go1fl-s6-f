@@ -1,6 +1,9 @@
 package handlers
 
-import "net/http"
+import (
+	"net/http"
+	"os"
+)
 
 
 func MainHandler(w http.ResponseWriter, req *http.Request) {
@@ -8,5 +11,11 @@ func MainHandler(w http.ResponseWriter, req *http.Request) {
         http.Error(w, "Сервер не поддерживает "+req.Method, http.StatusMethodNotAllowed)
         return
     }
-    http.ServeFile(w, req, "../index.html")
+    path := ""
+	if _, err := os.Stat("index.html"); err == nil {
+		path = "index.html"
+	} else if _, err := os.Stat("../index.html"); err == nil {
+        path = "../index.html"
+	}
+    http.ServeFile(w, req, path)
 }
