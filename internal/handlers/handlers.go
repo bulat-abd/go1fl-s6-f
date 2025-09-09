@@ -53,7 +53,7 @@ func UploadHandler(w http.ResponseWriter, req *http.Request) {
 	}
     log.Printf("UPLOAD: data received %s", data)
 	
-	convertedString := service.Transcode(string(data))
+	transcodedString := service.Transcode(string(data))
 
 	timestamp := time.Now().UTC().Format("2006-01-02_15-04-05")
 	fileName := timestamp + filepath.Ext(handler.Filename)
@@ -65,12 +65,12 @@ func UploadHandler(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	_, err = outFile.Write([]byte(convertedString))
+	_, err = outFile.Write([]byte(transcodedString))
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
 	w.WriteHeader(http.StatusOK)
-	w.Write([]byte(convertedString))
+	w.Write([]byte(transcodedString))
 }
