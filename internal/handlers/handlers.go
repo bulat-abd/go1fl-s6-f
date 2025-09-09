@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"io"
+	"log"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -50,7 +51,8 @@ func UploadHandler(w http.ResponseWriter, req *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-
+    log.Printf("UPLOAD: data received %s", data)
+	
 	convertedString := service.Transcode(string(data))
 
 	timestamp := time.Now().UTC().Format("2006-01-02_15-04-05")
