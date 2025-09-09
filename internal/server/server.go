@@ -31,6 +31,7 @@ func NewServer(addr string, logger *log.Logger) *Server {
 func (s *Server) routes() http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", handlers.MainHandler)
+	mux.HandleFunc("/upload", handlers.UploadHandler)
 	return mux
 }
 
