@@ -1,7 +1,8 @@
 package service
 
 import (
-    "string"
+    "strings"
+
 	"github.com/Yandex-Practicum/go1fl-sprint6-final/pkg/morse"
 )
 
@@ -13,8 +14,7 @@ func isMorse(input string) bool{
 func Transcode (input string) string {
     if isMorse(input) {
 		return morse.ToText(input)
-	}
-	else {
+	} else {
 		return morse.ToMorse(input)
 	}
 }
